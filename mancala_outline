@@ -1,0 +1,24 @@
+/////////////BOARD/////////////////
+2 sides of 6 pits each
+//2 seperate arrays of 6 indexes----OR assign even/odd data values to differentiate
+4 stones in each of the 12 pits
+//value of '4' (integer) in each index
+2 home pits...1 for each player, located after every 6th pit
+//each home pit must only be active during alternate turns
+//starting value of 0 in each of the home pits
+
+///////////////START//////////////
+player 1 picks up all stones from any pit on his side of the board
+//remove # stones from the selected pit---move counter-clockwise appending 1 //stone to each of the following # pits
+if player passes his 'home' drop 1 stone inside and keep moving in same direction
+//when passing home pit belongs to current player (after pit furthest to the right)--add 1 stone to that pit and remove 1 stone from hand
+if player passes opposing player home pit, just skip it
+//if passing home pit belongs to opposition (after pit furthest to the left), skip it keeping all stones in hand and adding none to the pit
+//if last dropped piece is in empty pit. collect that stone and the stones in the pit across the board---if index value in the number of pits after the number of stones in the chosen pit is equal to 0, append the index value in the pit across to players home pit
+//////////////GAME OVER/////////////
+game ends when all 6 pits on one side are empty
+//as soon as all 6 even(or odd) array indexes have a value of 0. game ends
+all the pieces left on the other side (even if odds are empty and vice versa) are added to the other players pit
+//add value of remaining index values to the oppositions pit
+player whose home pit has the highest value wins
+//compare index values in each pit...whichever number is higher determines the winner
