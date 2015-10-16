@@ -1,17 +1,55 @@
 //pit constructor
-var Pit = function(){
+var Pit = function(player){
   //each pit starts with 4 stones
-  this.value = 4;
+  this.stones = 4;
   //when pit is played, remove all stones...value becomes 0
-  this.played = function(){
-    this.value = 0;
+  this.empty = function(){
+    this.stones = 0;
   }
   //when pit is passed over, drop 1 stone into it
   this.drop = function(){
-    this.value +=1;
+    this.stones +=1;
+  }
+  this.playerHome = player;
+}
+
+var Board = function(){
+  this.pits = [];
+  this.makePits = function(){
+    for(var i = 0; i < 14; i++){
+      if(i===6){
+        this.pits.push(new Pit('playerOne'))
+      } else if(i===13){
+        this.pits.push(new Pit('playerTwo'))
+      } else{
+        this.pits.push(new Pit());
+      }
+    }
   }
 
-}
+ this.moveStones = function(pitNumber){
+   var movingStones = this.pits[pitNumber].stones;
+   this.pits[pitNumber].empty();
+   var i = 1;
+   while(movingStones > 0){
+     if(pitNumber + i >= this.pits.length){
+       i -= this.pits.length;
+     }
+     this.pits[pitNumber + i].drop();
+     movingStones--;
+     i++;
+   }
+ }
+ }
+
+
+
+
+
+
+
+
+
 
 var GameBoard = function(Pit){
 
@@ -68,7 +106,7 @@ var playerTwoHomeDivLocation = parseInt(playerTwoHome.getAttribute('data-val'));
 
 
 //GAME BOARD OBJECT
-var board (pitLocation,stonesInPit, whichPlayer)= {
+var board = {
   n1: [firstDivLocation, stonesInFirst, playerOne],
   n2: [secondDivLocation, stonesInSecond, playerOne],
   n3: [thirdDivLocation, stonesInThird, playerOne],
@@ -85,6 +123,9 @@ var board (pitLocation,stonesInPit, whichPlayer)= {
   playerTwoHome: [playerTwoHomeDivLocation, stonesInPlayerTwoHome, playerTwo],
 
 }
+
+
+
 
 clicke evnet {
   #n1.addEventListener('click', )
@@ -137,3 +178,31 @@ var stoneMover = function(){
     (pitArray[i] + pitValue) + 1;
   }
  }
+
+
+
+
+////array method
+var board = {
+ pitOneArray: ['stone', 'stone', 'stone', 'stone'];
+ pitTwoArray: ['stone', 'stone', 'stone', 'stone'];
+ pitThreeArray: ['stone', 'stone', 'stone', 'stone'];
+ pitFourArray: ['stone', 'stone', 'stone', 'stone'];
+ pitFiveArray: ['stone', 'stone', 'stone', 'stone'];
+ pitSixArray: ['stone', 'stone', 'stone', 'stone'];
+ playerOneHomePit: [];
+ pitEightArray: ['stone', 'stone', 'stone', 'stone'];
+ pitNineArray: ['stone', 'stone', 'stone', 'stone'];
+ pitTenArray: ['stone', 'stone', 'stone', 'stone'];
+ pitElevenArray: ['stone', 'stone', 'stone', 'stone'];
+ pitTwelveArray: ['stone', 'stone', 'stone', 'stone'];
+ pitThirteenArray: ['stone', 'stone', 'stone', 'stone'];
+ playerTwoHomePit: [];
+}
+
+document.getElementById("n1").addEventListener('click', function(){
+  for(i = 0; i < board[i].length; i++){
+    board[i].
+
+  }
+})
