@@ -29,15 +29,14 @@ var Board = function(){
   this.pits = [];
   //pushes 14 new pits into the this.pits array with the 7th and 14th pit being assigned to specific players
 
-
+ //display the changes is pit.stones after each turn
   this.updateBoard = function () {
     for(var i = 1; i < $('button').length; i++) {
-
       $($('button')[i]).html(this.pits[i - 1].stones)
     }
     playerSwitch();
   }
-
+//push 14 new pits into the pits array
   this.makePits = function(){
     for(var i = 0; i < 14; i++){
       if(i===6){
@@ -64,6 +63,7 @@ var Board = function(){
       if(pitNumber + i >= this.pits.length){
         i -= this.pits.length;
       }
+      //do not drop stones in opposing players home base
       if (currentPlayer === "playerOne" && pitNumber + i === 13) {
         i++;
       } else if (currentPlayer === "playerTwo" && pitNumber + i === 6) {
@@ -100,6 +100,7 @@ var Board = function(){
         self.pits[i].stones = 0;
         $pitButton.html(self.pits[i].stones);
       }
+
       //  var pitButton = document.createElement("button");
        //set the class for each button to gamePit
       //  pitButton.setAttribute("class", "gamePit")
