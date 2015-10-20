@@ -3,20 +3,23 @@
 
 
 
-
+//global variables
 var currentPlayer = 'playerOne';
+//counter is used to prevent the board constructor from appending a new board before page is refreshed
 var counter = 0;
+
+
 
 //pit constructor
 var Pit = function(currentPlayer){
 
   //each pit starts with 4 stones
   this.stones = 4;
-  //when pit is played, remove all stones...value becomes 0
+  //when pit is played(cooresponding div is clicked), remove all stones...value becomes 0
   this.empty = function(){
     this.stones = 0;
   }
-  //when pit is passed over, drop 1 stone into it
+  //when pit is within (# of stones emptied) + (# of div they were picked from) divs, drop 1 stone into it
   this.drop = function(){
     this.stones +=1;
   }
@@ -24,12 +27,13 @@ var Pit = function(currentPlayer){
 }
 //board constructor
 var Board = function(){
+  //NOT DONE -- WINNER WILL BE PUSHED
   //array of pits to be pushed by makePits function
   var winner = '';
   this.pits = [];
   //pushes 14 new pits into the this.pits array with the 7th and 14th pit being assigned to specific players
 
- //display the changes is pit.stones after each turn
+ //(JQUERY)display the changes is pit.stones after each turn
   this.updateBoard = function () {
     for(var i = 1; i < $('button').length; i++) {
       $($('button')[i]).html(this.pits[i - 1].stones)
@@ -37,6 +41,7 @@ var Board = function(){
     playerSwitch();
   }
 //push 14 new pits into the pits array
+//designate the 7th and 14th pits as belonging to a respective player
   this.makePits = function(){
     for(var i = 0; i < 14; i++){
       if(i===6){
@@ -51,6 +56,7 @@ var Board = function(){
   this.makePits();
 
   this.moveStones = function(pitNumber){
+    //assign the pitNumber to the integer within the button ID
       pitNumber = parseInt($(pitNumber).attr('id')
                   .split('n')[1]);
     //create var that sets movingStones to the number of stones in the selected pit
@@ -69,13 +75,14 @@ var Board = function(){
       } else if (currentPlayer === "playerTwo" && pitNumber + i === 6) {
         i++;
       } else {
+        //drop 1 stone in each of the following pits until the stones run out
         this.pits[pitNumber + i].drop();
         movingStones--;
         i++;
         this.pits[pitNumber].stones;
       }
     }
-
+//update the board displaying the new number of stones in each div
     this.updateBoard();
   };
 
@@ -88,19 +95,20 @@ var Board = function(){
        var boardDiv = document.getElementById("gameBoard");
        boardDiv.appendChild(sideOfBoard);
      }
-     //create a button for each div
+     //(JQUERY) create a button, id, class and listener for each div, also displays number of stones in the html
      var $pitButton = $('<button>').attr('id', 'n' + i)
                                    .attr('class', 'gamePit')
+                                   //.target was suggestion to fix bug
                                    .on('click', function (e) {
                                      self.moveStones(e.target);
                                    })
                                    .html(self.pits[i].stones)
-
+   //set stone value of home bases to 0
       if(i === 6 || i === 13){
         self.pits[i].stones = 0;
         $pitButton.html(self.pits[i].stones);
       }
-
+//VANILLA VERSION OF ABOVE
       //  var pitButton = document.createElement("button");
        //set the class for each button to gamePit
       //  pitButton.setAttribute("class", "gamePit")
@@ -119,48 +127,13 @@ var Board = function(){
 
       }
     };
-
+//updates universal counter to make sure that start button must restart to work again
     if(window.counter === 0) {
       this.renderPits();
       window.counter++;
     }
 
-
-
-  // this.moveStones = function(pitNumber){
-  //   //create var that sets movingStones to the number of stones in the selected pit
-  //   var movingStones = this.pits[pitNumber].stones;
-  //   //set number of stones in slected pit to zero
-  //   this.pits[pitNumber].empty();
-  //   var i = 1;
-  //   //move around the board adding one stone to each of the following pits until the stones run out
-  //   while(movingStones > 0){
-  //     if(pitNumber + i >= this.pits.length){
-  //       i -= this.pits.length;
-  //     }
-  //     this.pits[pitNumber + i].drop();
-  //     movingStones--;
-  //     i++;
-  //     this.pits[pitNumber].stones;
-  //   }
-  //
-  //
-  // };
-
-  //event listener for pit buttons
-//   for(i=0;i<this.pits.length;i++){
-//     var chosenPit = document.getElementById(i);
-//     chosenPit.addEventListener('click', function(){
-//       this.moveStones()
-//     });
-//
-// }
-
-
-
-
-
-
+//Details win conditions and declares the winner if conditions are met
   this.checkForWin = function(){
     //if either side of pits is emptied, add all stones on opposing side to oppposing players home pit
     if(this.pits[0].stones === 0 && this.pits[1].stones === 0 && this.pits[2].stones === 0 && this.pits[3].stones === 0 && this.pits[4].stones === 0 && this.pits[5].stones === 0){
@@ -210,7 +183,7 @@ var Board = function(){
 
 
 ///start a new game
-//attempt at setting click events and tying it all together STILL WORKING ON IT
+//create new board on click of start button
 
    var startButton = document.getElementById("startGame");
 

@@ -1,19 +1,35 @@
+body{
+  background-image: url('http://static1.squarespace.com/static/53c550f0e4b0cf6b5363b589/5490c71be4b044e81ee6cd15/5490cbe6e4b05bc82077f272/1418775529150/Website+Background+copy.jpg?format=1500w');
+
+}
+
+.header{
+  position: relative;
+  margin-left: 350px;
+}
+
 #startGame{
-  width: 150px;
-  height: 80px;
+  width: 210px;
+  height: 40px;
   font-family: cursive;
   font-size: 15px;
-  color: #1B6AA2;
-  background: #A21B2D;
+  color: white;
+  background: black;
+  margin-left: 165px;
 }
 
 h1{
+  font-size: 100px;
   color: red;
   font-family: fantasy;
+  margin: 0 auto;
 }
 h2{
-  color: blue;
+  color: white;
   font-family: cursive;
+  margin-left: 175px;
+  margin-bottom: 35px;
+  margin-top: -50px;
 }
 
 
@@ -28,9 +44,13 @@ h2{
 .gamePit{
   height: 150px;
   width: 90px;
-  border: 4px solid black;
+  border: 4px solid grey;
   display: inline;
   vertical-align: top;
+  font-family: fantasy;
+  font-size: 70px;
+  color: black;
+  background-image: url('http://gdj.gdj.netdna-cdn.com/wp-content/uploads/2013/03/wood+pattern+texture+7.jpg');
 }
 #gameBoard{
   position: relative;
