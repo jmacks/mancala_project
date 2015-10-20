@@ -39,6 +39,7 @@ var Board = function(){
       $($('button')[i]).html(this.pits[i - 1].stones)
     }
     playerSwitch();
+
   }
 //push 14 new pits into the pits array
 //designate the 7th and 14th pits as belonging to a respective player
