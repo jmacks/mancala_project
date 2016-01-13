@@ -8,6 +8,7 @@ var currentPlayer = 'playerOne';
 //counter is used to prevent the board constructor from appending a new board before page is refreshed
 var counter = 0;
 
+var infoDisplay = document.getElementById("info-display");
 
 
 //pit constructor
@@ -168,12 +169,15 @@ var Board = function(){
 
     this.checkForWin();
 
+
     var playerSwitch = function(){
       if(currentPlayer === 'playerOne'){
         currentPlayer = 'playerTwo';
+        infoDisplay.innerHTML = 'Its your turn ' + currentPlayer;
         return currentPlayer;
       }else if (currentPlayer === 'playerTwo') {
         currentPlayer = 'playerOne';
+        infoDisplay.innerHTML = 'Its your turn ' + currentPlayer;
         return currentPlayer;
       }
     }
@@ -190,6 +194,7 @@ var Board = function(){
 
    startButton.addEventListener('click', function(){
      var newBoard = new Board();
+     infoDisplay.innerHTML = 'Its your turn ' + currentPlayer;
    }
   );
 

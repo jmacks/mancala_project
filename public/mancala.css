@@ -5,7 +5,7 @@ body{
 
 .header{
   position: relative;
-  margin-left: 350px;
+  margin-left: 260px;
 }
 
 #startGame{
@@ -34,13 +34,7 @@ h2{
 
 
 
-/*.pit{
-  height: 360px;
-  width: 250px;
-  border: 3px solid black;
-  display: inline;
-}*/
-
+/*the game board css*/
 .gamePit{
   height: 150px;
   width: 90px;
@@ -83,4 +77,16 @@ h2{
 #n6{
   position: relative;
   top: -150px;
+}
+
+/*the info display*/
+#info-display{
+  height: 40px;
+  width: 500px;
+  margin-left: 280px;
+  text-align: center;
+  font-size: 30px;
+  font-family: fantasy;
+  background-color: black;
+  color: red;
 }
