@@ -3,20 +3,21 @@
 
 
 
-//global variables
+/////global variables
 var currentPlayer = 'playerOne';
 //counter is used to prevent the board constructor from appending a new board before page is refreshed
 var counter = 0;
-
+//setting up div to display info about game like current turn adn winner
 var infoDisplay = document.getElementById("info-display");
-
+//save some room in memory for the future lucky winner
+var winner = '';
 
 //pit constructor
 var Pit = function(currentPlayer){
 
   //each pit starts with 4 stones
   this.stones = 4;
-  //when pit is played(cooresponding div is clicked), remove all stones...value becomes 0
+  //when pit is played, we need to be able remove all of its stones
   this.empty = function(){
     this.stones = 0;
   }
@@ -28,6 +29,7 @@ var Pit = function(currentPlayer){
 }
 //board constructor
 var Board = function(){
+  var self = this;
   //NOT DONE -- WINNER WILL BE PUSHED
   //array of pits to be pushed by makePits function
   var winner = '';
@@ -137,6 +139,7 @@ var Board = function(){
 
 //Details win conditions and declares the winner if conditions are met
   this.checkForWin = function(){
+    console.log(this.pits[0].stones)
     //if either side of pits is emptied, add all stones on opposing side to oppposing players home pit
     if(this.pits[0].stones === 0 && this.pits[1].stones === 0 && this.pits[2].stones === 0 && this.pits[3].stones === 0 && this.pits[4].stones === 0 && this.pits[5].stones === 0){
       var sumOfPtwoRemainingStones = this.pits[7].stones + this.pits[8].stones + this.pits[9].stones + this.pits[10].stones + this.pits[11].stones + this.pits[12].stones;
@@ -174,10 +177,12 @@ var Board = function(){
       if(currentPlayer === 'playerOne'){
         currentPlayer = 'playerTwo';
         infoDisplay.innerHTML = 'Its your turn ' + currentPlayer;
+        self.checkForWin();
         return currentPlayer;
       }else if (currentPlayer === 'playerTwo') {
         currentPlayer = 'playerOne';
         infoDisplay.innerHTML = 'Its your turn ' + currentPlayer;
+        self.checkForWin();
         return currentPlayer;
       }
     }
@@ -201,172 +206,3 @@ var Board = function(){
 
 
      console.log(currentPlayer);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// var GameBoard = function(Pit){
-//
-// }
-//
-// //variables for each pit div
-//
-// var firstDivId = document.querySelector('div#n1');
-// var secondDivId = document.querySelector('div#n2');
-// var thirdDivId = document.querySelector('div#n3');
-// var fourthDivId = document.querySelector('div#n4');
-// var fifthDivId = document.querySelector('div#n5');
-// var sixthDivId = document.querySelector('div#n6');
-// var playerOneHome = document.querySelector('div#playerOneHome');
-// var eighthDivId = document.querySelector('div#n8');
-// var ninthDivId = document.querySelector('div#n9');
-// var tenthDivId = document.querySelector('div#n10');
-// var eleventhDivId = document.querySelector('div#n11');
-// var twelvthDivId = document.querySelector('div#n12');
-// var thirteenthDivId = document.querySelector('div#n13');
-// var playerTwoHome = document.querySelector('div#playerTwoHome');
-//
-// //variables to retrieve the number of stones in each pit div
-// var stonesInFirst = parseInt(firstDivId.innerHTML);
-// var stonesInSecond = parseInt(secondDivId.innerHTML);
-// var stonesInThird = parseInt(thirdDivId.innerHTML);
-// var stonesInFourth = parseInt(fourthDivId.innerHTML);
-// var stonesInFifth = parseInt(fifthDivId.innerHTML);
-// var stonesInSixth = parseInt(sixthDivId.innerHTML);
-// var stonesInPlayerOneHome = parseInt(playerOneHome.innerHTML);
-// var stonesInEighth = parseInt(eighthDivId.innerHTML);
-// var stonesInNinth = parseInt(ninthDivId.innerHTML);
-// var stonesInTenth = parseInt(tenthDivId.innerHTML);
-// var stonesInEleventh = parseInt(eleventhDivId.innerHTML);
-// var stonesInTwelvth = parseInt(twelvthDivId.innerHTML);
-// var stonesInThirteenth = parseInt(thirteenthDivId.innerHTML);
-// var stonesInPlayerTwoHome = parseInt(playerTwoHome.innerHTML);
-//
-// //variables to retrieve data values of divs in integer form
-// var firstDivLocation = parseInt(firstDivId.getAttribute('data-val'));
-// var secondDivLocation = parseInt(secondDivId.getAttribute('data-val'));
-// var thirdDivLocation = parseInt(thirdDivId.getAttribute('data-val'));
-// var fourthDivLocation = parseInt(fourthDivId.getAttribute('data-val'));
-// var fifthDivLocation = parseInt(fifthDivId.getAttribute('data-val'));
-// var sixthDivLocation = parseInt(sixthDivId.getAttribute('data-val'));
-// var playerOneHomeDivLocation = parseInt(playerOneHome.getAttribute('data-val'));
-// var eighthDivLocation = parseInt(eighthDivId.getAttribute('data-val'));
-// var ninthDivLocation = parseInt(ninthDivId.getAttribute('data-val'));
-// var tenthDivLocation = parseInt(tenthDivId.getAttribute('data-val'));
-// var eleventhDivLocation = parseInt(eleventhDivId.getAttribute('data-val'));
-// var twelvthDivLocation = parseInt(twelvthDivId.getAttribute('data-val'));
-// var thirteenthDivLocation = parseInt(thirteenthDivId.getAttribute('data-val'));
-// var playerTwoHomeDivLocation = parseInt(playerTwoHome.getAttribute('data-val'));
-//
-//
-// //GAME BOARD OBJECT
-// var board = {
-//   n1: [firstDivLocation, stonesInFirst, playerOne],
-//   n2: [secondDivLocation, stonesInSecond, playerOne],
-//   n3: [thirdDivLocation, stonesInThird, playerOne],
-//   n4: [fourthDivLocation, stonesInFourth, playerOne],
-//   n5: [fifthDivLocation, stonesInFifth, playerOne],
-//   n6: [sixthDivLocation, stonesInSixth, playerOne],
-//   playerOneHome: [playerOneHomeDivLocation, stonesInPlayerOneHome, playerOne],
-//   n8: [eighthDivLocation, stonesInEighth, playerTwo],
-//   n9: [ninthDivLocation, stonesInNinth, playerTwo],
-//   n10: [tenthDivLocation, stonesInTenth, playerTwo],
-//   n11: [eleventhDivLocation, stonesInEleventh, playerTwo],
-//   n12: [twelvthDivLocation, stonesInTwelvth, playerTwo],
-//   n13: [thirteenthDivLocation, stonesInThirteenth, playerTwo],
-//   playerTwoHome: [playerTwoHomeDivLocation, stonesInPlayerTwoHome, playerTwo],
-//
-// }
-//
-//
-//
-//
-// clicke evnet {
-//   #n1.addEventListener('click', )
-//   var playAmount = board[this.id].addEventListener('click');
-//
-// }
-//
-//
-// var pitArray = [firstDivId, secondDivId, thirdDivId, fourthDivId, fifthDivId, sixthDivId, playerOneHome, eighthDivId, ninthDivId, tenthDivId, eleventhDivId, twelvthDivId, thirteenthDivId, playerTwoHome];
-//
-// var pitLocation = [firstDivLocation, secondDivLocation, thirdDivLocation, fourthDivLocation, fifthDivLocation, sixthDivLocation, playerOneHomeDivLocation, eighthDivLocation, ninthDivLocation, tenthDivLocation, eleventhDivLocation, twelvthDivLocation, thirteenthDivLocation, playerTwoHomeDivLocation];
-//
-// var stonesInPit = [stonesInFirst, stonesInSecond, stonesInThird, stonesInFourth, stonesInFifth, stonesInSixth, stonesInPlayerOneHome, stonesInEighth, stonesInNinth, stonesInTenth, stonesInEleventh, stonesInTwelvth, stonesInThirteenth, stonesInPlayerTwoHome];
-//
-// var stonesInSelectedPit =
-//
-// //click functions
-// var spotsToAdvance = function(clickedLocation){
-//   for(i = stonesInPit; i = 0; i--){
-//     pitLocation + stonesInPit[i];
-//   }
-// }
-//
-//
-//
-//
-// ///click events
-// firstDivId.addEventListener('click', ...)
-//
-//  //
-//  // var newFcn = function(pit){
-//  //   //expected input: pit OBJ
-//  //
-//  //   pit.value = 10;
-//  // }
-//
-// console.log(parseInt(thirteenthDivId.innerHTML) + 1);
-//
-// var stoneMover = function(){
-//    var pitId = function(){
-//      for(i = 0; i < pitArray.length; i++){
-//
-//        console.log(pitArray[i]);
-//
-//    }
-// }
-//   var pitValue = pitId().value;
-//
-//   for(i = pitValue; i > 1; i --){
-//     (pitArray[i] + pitValue) + 1;
-//   }
-//  }
-//
-//
-//
-//
-// ////array method
-// var board = {
-//  pitOneArray: ['stone', 'stone', 'stone', 'stone'];
-//  pitTwoArray: ['stone', 'stone', 'stone', 'stone'];
-//  pitThreeArray: ['stone', 'stone', 'stone', 'stone'];
-//  pitFourArray: ['stone', 'stone', 'stone', 'stone'];
-//  pitFiveArray: ['stone', 'stone', 'stone', 'stone'];
-//  pitSixArray: ['stone', 'stone', 'stone', 'stone'];
-//  playerOneHomePit: [];
-//  pitEightArray: ['stone', 'stone', 'stone', 'stone'];
-//  pitNineArray: ['stone', 'stone', 'stone', 'stone'];
-//  pitTenArray: ['stone', 'stone', 'stone', 'stone'];
-//  pitElevenArray: ['stone', 'stone', 'stone', 'stone'];
-//  pitTwelveArray: ['stone', 'stone', 'stone', 'stone'];
-//  pitThirteenArray: ['stone', 'stone', 'stone', 'stone'];
-//  playerTwoHomePit: [];
-// }
-//
-// document.getElementById("n1").addEventListener('click', function(){
-//   for(i = 0; i < board[i].length; i++){
-//     board[i].
-//
-//   }
-// })
