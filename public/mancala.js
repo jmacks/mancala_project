@@ -139,6 +139,11 @@ var Board = function(){
 
 //Details win conditions and declares the winner if conditions are met
   this.checkForWin = function(){
+    //function that displays winner name in info display
+    function displayWinner(winner){
+      infoDisplay.innerHTML = winner + ' has won!! CONGRATS!'
+    }
+    
     console.log(this.pits[0].stones)
     //if either side of pits is emptied, add all stones on opposing side to oppposing players home pit
     if(this.pits[0].stones === 0 && this.pits[1].stones === 0 && this.pits[2].stones === 0 && this.pits[3].stones === 0 && this.pits[4].stones === 0 && this.pits[5].stones === 0){
@@ -147,13 +152,18 @@ var Board = function(){
       var playerOneTotal = this.pits[6].stones;
       //count stones in each players home and compare the numbers, delcare winner as player with most stones in home
       if(playerTwoTotal > playerOneTotal){
-        alert('player two has won');
-        return winner = 'playerTwo';
+        console.log('player two has won');
+        winner = 'playerTwo';
+        displayWinner(winner);
+        return;
       }else if(playerOneTotal > playerTwoTotal){
-        alert('player one has won');
-        return winner = 'playerOne';
+        console.log('player one has won');
+        winner = 'playerOne';
+        displayWinner(winner);
+        return;
       }else {
-        return alert('somehow, its a tie???')
+        alert('somehow, its a tie???');
+        return;
       }
     }
     else if (this.pits[7].stones === 0 && this.pits[8].stones === 0 && this.pits[9].stones === 0 && this.pits[10].stones === 0 && this.pits[11].stones === 0 && this.pits[12].stones === 0) {
@@ -161,9 +171,15 @@ var Board = function(){
       var playerTwoTotal = this.pits[13].stones;
       var playerOneTotal = this.pits[6].stones + sumOfPoneRemainingStones;
       if(playerTwoTotal > playerOneTotal){
-        return alert('player two has won');
+        console.log('player two has won');
+        winner = 'playerTwo';
+        displayWinner(winner);
+        return;
       }else if(playerOneTotal > playerTwoTotal){
-        return alert('player one has won')
+        console.log('player one has won');
+        winner = 'playerOne';
+        displayWinner(winner);
+        return;
       }else {
         return alert('somehow, its a tie???')
       }
